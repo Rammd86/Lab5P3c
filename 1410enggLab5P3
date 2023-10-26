@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int main() {
+    int letterCounts[26] = {0}; 
+    char input[1000]; 
+    printf("Enter text (press Enter twice):\n");
+
+    while (1) {
+        fgets(input, sizeof(input), stdin); //had to search this up
+
+        if (input[0] == '\n') {
+            break;
+        }
+
+        for (int i = 0; input[i] != '\0'; i++) {
+            char c = input[i];
+
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
+                if (c >= 'a' && c <= 'z') {
+                    c -= 'a' - 'A';
+                }
+
+                letterCounts[c - 'A']++;
+            }
+        }
+    }
+
+    for (int i = 0; i < 26; i++) {
+        if (letterCounts[i] > 0) {
+            printf("%c: %d\n", 'A' + i, letterCounts[i]);
+        }
+    }
+
+    return 0;
+}
